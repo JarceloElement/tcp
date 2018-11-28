@@ -7,14 +7,12 @@ Communicate between godot and nodejs with TCP
 `npm install --save @gd-com/tcp`
 
 
-## Test
+## Usage
 
-```
-git clone git@github.com:gd-com/tcp.git gd-com-tcp
-cd gd-com-tcp
-npm install or yarn install
-npm run lint && npm run test
-```
+Examples *[there](https://github.com/gd-com/tcp/tree/master/examples)*
+
+Variant and custom packet
+
 
 ## Contributing
 

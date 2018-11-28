@@ -1,6 +1,6 @@
 {
   "name": "@gd-com/tcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Communicate between godot and nodejs with TCP",
   "main": "src/index.js",
   "scripts": {
@@ -47,6 +47,6 @@
     ]
   },
   "dependencies": {
-    "@gd-com/utils": "^2.1.2"
+    "@gd-com/utils": "^2.2.0"
   }
 }

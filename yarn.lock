@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@gd-com/utils@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@gd-com/utils/-/utils-2.1.2.tgz#41a80171d707e7174f3091ed3b3c6abef9e02163"
-  integrity sha512-hP50KkbYK+OGuIIclfGPW6G9w6gDp+25kMPXdNNLUx6gnROaQ0KtVIH0zwjEd3cYppL6y6uhdspsp9OVNIYgMw==
+"@gd-com/utils@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@gd-com/utils/-/utils-2.2.0.tgz#35797b1cdc8a1b246a334529e0f901e86841e0f5"
+  integrity sha512-HUwWGOYqiLAj/mCr9lusDqnRvP5zWBDUJl3ytBZRR4JASPnJEF3E/7o3LdBKepkrAZbyEQG+nUQ2lF+9Lj6peA==
   dependencies:
     long "^4.0.0"
 

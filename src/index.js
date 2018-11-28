@@ -1,4 +1,5 @@
 const Transform = require('stream').Transform
+const { GdBuffer, putVar, getVar } = require('@gd-com/utils')
 
 class StreamTcp extends Transform {
   _transform (chunk, enc, done) {
@@ -15,22 +16,37 @@ class StreamTcp extends Transform {
   }
 }
 
-const put = (method, value) => {
-  return new Promise((resolve, reject) => {
-    try {
-      method(value).then(encoded => {
-        let buf = Buffer.alloc(encoded.length + 4)
-        buf.writeUInt32LE(encoded.length, 0)
-        encoded.copy(buf, 4)
-        resolve(buf)
-      })
-    } catch (e) {
-      reject(e)
-    }
-  })
+class GdBufferTcp extends GdBuffer {
+  // need to override putVar to add length on top of it
+  async putVar (value) {
+    const data = await putVar(value)
+    let buf = Buffer.alloc(data.length + 4)
+    buf.writeUInt32LE(data.length, 0)
+    data.copy(buf, 4)
+    const newBuff = Buffer.alloc(this.buffer.length + buf.length)
+    this.buffer.copy(newBuff, 0)
+    buf.copy(newBuff, this.buffer.length)
+    this.buffer = newBuff
+    return newBuff
+  }
+
+  // need to override getVar to remove length on top of it
+  async getVar () {
+    let result = await getVar(this.buffer.slice(this.cursor + 4))
+    this.cursor += result.length + 4
+    await super._internalResetBuffer()
+    return result.value
+  }
+
+  getBuffer () {
+    let buf = Buffer.alloc(this.buffer.length + 4)
+    buf.writeUInt32LE(this.buffer.length, 0)
+    this.buffer.copy(buf, 4)
+    return buf
+  }
 }
 
 module.exports = {
   StreamTcp,
-  put
+  GdBufferTcp
 }
